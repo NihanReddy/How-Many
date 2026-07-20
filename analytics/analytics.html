@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Many - Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <link rel="stylesheet" href="analytics.css">
+</head>
+<body class="light-theme">
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">How Many</h1>
+                <p class="sidebar-subtitle">Usage Analytics</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item" data-page="current-site">
+                    <span class="nav-icon">🌐</span>
+                    <span class="nav-label">Current Site</span>
+                </a>
+                <a href="#" class="nav-item active" data-page="analytics">
+                    <span class="nav-label">Analytics</span>
+                </a>
+                <a href="#" class="nav-item" data-page="history">
+                    <span class="nav-label">Full History</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="#" class="nav-item" data-page="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-label">Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-bar">
+                <div class="header-left">
+                    <button class="back-btn" onclick="goBack()">←</button>
+                    <h2 class="header-title">Analytics Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn" id="refreshBtn" title="Refresh">🔄</button>
+                    <button class="icon-btn" title="Help">❓</button>
+                </div>
+            </header>
+
+            <!-- Chart Selection Tabs -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-chart="top-visits">Top 10 Visits</button>
+                    <button class="tab-btn" data-chart="pie-chart">Visit Distribution</button>
+                    <button class="tab-btn" data-chart="column-chart">Visit Comparison</button>
+                    <button class="tab-btn" data-chart="statistics">Statistics</button>
+                </div>
+            </div>
+
+            <!-- Charts Container -->
+            <div class="charts-container">
+                <!-- Bar Chart - Top 10 Visits -->
+                <section class="chart-section active" id="top-visits-section">
+                    <div class="section-header">
+                        <h3>Top 10 Most Visited Sites</h3>
+                        <p class="section-description">Your most frequently visited websites</p>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="topVisitsChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Pie Chart - Visit Distribution -->
+                <section class="chart-section" id="pie-chart-section">
+                    <div class="section-header">
+                        <h3>Visit Distribution</h3>
+                        <p class="section-description">Percentage breakdown of your browsing habits</p>
+                    </div>
+                    <div class="charts-row">
+                        <div class="chart-wrapper">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                        <div class="legend-section">
+                            <h4>Top Sites</h4>
+                            <div id="pieLegend" class="legend-items"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Column Chart - Top 15 Comparison -->
+                <section class="chart-section" id="column-chart-section">
+                    <div class="section-header">
+                        <h3>Top 15 Sites Comparison</h3>
+                        <p class="section-description">Detailed column chart of your top visited sites</p>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="columnChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Statistics Section -->
+                <section class="chart-section" id="statistics-section">
+                    <div class="section-header">
+                        <h3>Statistics & Insights</h3>
+                        <p class="section-description">Your browsing analytics at a glance</p>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <p class="stat-label">Total Visits</p>
+                                <p class="stat-value" id="totalVisits">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🌐</div>
+                            <div class="stat-content">
+                                <p class="stat-label">Unique Sites</p>
+                                <p class="stat-value" id="uniqueSites">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-content">
+                                <p class="stat-label">Most Visited</p>
+                                <p class="stat-value" id="mostVisited">—</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📈</div>
+                            <div class="stat-content">
+                                <p class="stat-label">Average Visits</p>
+                                <p class="stat-value" id="averageVisits">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table of All Sites -->
+                    <div class="table-section">
+                        <h4>All Tracked Sites</h4>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Domain</th>
+                                        <th>Visits</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sitesTableBody">
+                                    <tr><td colspan="4" class="no-data">Loading data...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="analytics.js"></script>
+</body>
+</html>

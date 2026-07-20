@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "How Many - Site Visit Counter",
+  "version": "1.1.0",
+  "description": "Count how many times you visit each website. Get celebration popups at 1M and 10M visits!",
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "notifications"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "incognito": "split",
+  "options_page": "settings/settings.html",
+  "background": {
+    "service_worker": "service-worker/service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "How Many - Site Visit Counter"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["popup/popup.html", "settings/settings.html", "analytics/analytics.html"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-scripts/content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  }
+}

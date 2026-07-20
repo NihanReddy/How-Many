@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Many - Site Visit Counter</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <h1> How Many</h1>
+                    <p class="subtitle">Site Visit Counter</p>
+                </div>
+                <button id="settingsBtn" class="settings-btn" title="Settings">
+                    ⚙️
+                </button>
+            </div>
+        </div>
+
+        <div class="current-site">
+            <h2>Current Site</h2>
+            <div class="site-card">
+                <div class="site-name" id="currentSite">Loading...</div>
+                <div class="visit-count">
+                    <span class="number" id="currentCount">0</span>
+                    <span class="label">visits</span>
+                </div>
+                <div class="site-actions">
+                    <button id="resetBtn" class="btn btn-secondary" title="Reset count to 0">
+                         Reset
+                    </button>
+                    <button id="toggleDisableBtn" class="btn btn-secondary" title="Stop counting for this site">
+                         Disable
+                    </button>
+                    <button id="deleteBtn" class="btn btn-danger" title="Delete this site's data">
+                         Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="version">How Many v1.0.0</p>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Many - Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body class="light-theme">
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">How Many</h1>
+                <p class="sidebar-subtitle">Usage Analytics</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    <span class="nav-label">Current Site</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    <span class="nav-label">Full History</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-label">Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-bar">
+                <div class="header-left">
+                    <button class="back-btn" id="backBtn">←</button>
+                    <h2 class="header-title">Extension Settings</h2>
+                </div>
+            </header>
+
+            <!-- Settings Grid -->
+            <div class="settings-grid">
+                <!-- Tracking Settings -->
+                <section class="settings-section tracking-section">
+                    <div class="section-header">
+                        <h3 class="section-title"> Tracking Settings</h3>
+                        <p class="section-description">Control how 'How Many' collects and processes your browsing metrics.</p>
+                    </div>
+                    
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <p class="setting-label">Enable Visit Tracking</p>
+                                <p class="setting-description">Automatically count every visit to domains in your active tabs.</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="trackingToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <p class="setting-label">Incognito Mode Tracking</p>
+                                <p class="setting-description">Continue tracking visits when browsing in private windows.</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="incognitoToggle" disabled>
+                                <span class="toggle-slider disabled-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Privacy Info Card -->
+                <div class="privacy-card">
+                    <div class="privacy-content">
+                        <h4 class="privacy-title">🔒 Data Privacy</h4>
+                        <p class="privacy-text">Your data stays local. We never upload your history to our servers. Your insights are for your eyes only.</p>
+                        <button class="privacy-btn">View Privacy Policy</button>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <section class="settings-section notification-section">
+                    <h3 class="section-title"> Notification Settings</h3>
+                    
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <p class="setting-label">Enable Milestone Celebrations</p>
+                                <p class="setting-description">Get notified when you reach 1M and 10M visits to a site.</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="celebrationToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Management -->
+                <section class="settings-section data-section">
+                    <h3 class="section-title"> Data Management</h3>
+                    <p class="section-description">Take control of your analytics database. Export for external processing or reset for a fresh start.</p>
+                    
+                    <div class="button-group">
+                        <button id="exportBtn" class="btn btn-primary"> Export Data</button>
+                        <button id="clearBtn" class="btn btn-danger"> Clear All Data</button>
+                    </div>
+                </section>
+
+                <!-- Storage Usage -->
+                <section class="settings-section storage-section">
+                    <div class="storage-content">
+                        <div class="storage-circle">
+                            <svg viewBox="0 0 100 100" class="storage-svg">
+                                <circle class="storage-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="storage-progress" cx="50" cy="50" r="45" style="stroke-dashoffset: 69;"></circle>
+                            </svg>
+                            <span class="storage-percent" id="storagePercent">0%</span>
+                        </div>
+                        <div class="storage-info">
+                            <h3 class="storage-title">Local Storage Utilization</h3>
+                            <p class="storage-text" id="storageText">Loading...</p>
+                            <div class="storage-actions">
+                                <button class="storage-link">Optimize Database</button>
+                                <button class="storage-link">View Log File</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Footer -->
+            <footer class="settings-footer">
+                <div class="footer-left">
+                    <span id="versionInfo">Version 1.1.0 (Stable)</span>
+                    <span class="footer-link">Release Notes</span>
+                </div>
+                <div class="footer-right">© 2024 How Many. All rights reserved.</div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+</html>
