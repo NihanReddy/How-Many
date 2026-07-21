@@ -1,51 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How Many - Site Visit Counter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-top">
-                <div>
-                    <h1> How Many</h1>
-                    <p class="subtitle">Site Visit Counter</p>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="brand-block">
+                <div class="brand-icon">
+                    <span class="brand-icon-symbol">↗</span>
                 </div>
-                <button id="settingsBtn" class="settings-btn" title="Settings">
-                    ⚙️
+                <div class="brand-text">
+                    <h1 class="brand-title">How Many</h1>
+                    <p class="brand-subtitle">Site visit counter</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="analyticsBtn" class="icon-btn" title="Open analytics" aria-label="Analytics">
+                    <span class="material-symbol">📊</span>
+                </button>
+                <button id="settingsBtn" class="icon-btn" title="Open settings" aria-label="Settings">
+                    <span class="material-symbol">⚙️</span>
                 </button>
             </div>
-        </div>
+        </header>
 
-        <div class="current-site">
-            <h2>Current Site</h2>
-            <div class="site-card">
-                <div class="site-name" id="currentSite">Loading...</div>
-                <div class="visit-count">
-                    <span class="number" id="currentCount">0</span>
-                    <span class="label">visits</span>
+        <main class="content">
+            <section class="hero-card">
+                <div class="hero-top">
+                    <div class="hero-context">
+                        <span class="label-sm">Current site</span>
+                        <h2 class="hero-domain" id="currentSite">Loading...</h2>
+                    </div>
+                    <span class="status-chip" id="trackingState">
+                        <span class="status-dot"></span>
+                        Tracking
+                    </span>
                 </div>
+
+                <div class="count-row">
+                    <div class="count-block">
+                        <span class="label-sm">Total visits</span>
+                        <div class="count-value" id="currentCount">
+                            <span class="count-number">0</span>
+                        </div>
+                    </div>
+                    <div class="count-aside">
+                        <span class="stat-pill mono-data">Live</span>
+                    </div>
+                </div>
+
                 <div class="site-actions">
                     <button id="resetBtn" class="btn btn-secondary" title="Reset count to 0">
-                         Reset
+                        <span class="btn-icon">↺</span>
+                        Reset
                     </button>
                     <button id="toggleDisableBtn" class="btn btn-secondary" title="Stop counting for this site">
-                         Disable
+                        <span class="btn-icon">⏸</span>
+                        Disable
                     </button>
                     <button id="deleteBtn" class="btn btn-danger" title="Delete this site's data">
-                         Delete
+                        <span class="btn-icon">✕</span>
+                        Delete
                     </button>
                 </div>
-            </div>
-        </div>
-        <div class="footer">
-            <p class="version">How Many v1.0.0</p>
-        </div>
+            </section>
+        </main>
     </div>
 
     <script src="popup.js"></script>
 </body>
 </html>
+

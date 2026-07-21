@@ -7,157 +7,155 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <link rel="stylesheet" href="analytics.css">
 </head>
-<body class="light-theme">
-    <div class="container">
-        <!-- Sidebar Navigation -->
+<body>
+    <div class="dashboard-shell">
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="sidebar-title">How Many</h1>
-                <p class="sidebar-subtitle">Usage Analytics</p>
+            <div class="brand-block">
+                <div class="brand-mark">HT</div>
+                <div>
+                    <p class="brand-name">Tracker Pro</p>
+                    <h1>InsightTrack</h1>
+                    <span class="brand-version">V2.4.0</span>
+                </div>
             </div>
-            
-            <nav class="sidebar-nav">
+
+            <nav class="sidebar-nav" aria-label="Primary">
                 <a href="#" class="nav-item" data-page="current-site">
-                    <span class="nav-icon">🌐</span>
-                    <span class="nav-label">Current Site</span>
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
                 </a>
                 <a href="#" class="nav-item active" data-page="analytics">
-                    <span class="nav-label">Analytics</span>
+                    <span class="nav-icon">⌁</span>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <span class="nav-icon">◌</span>
+                    <span>Targets</span>
                 </a>
                 <a href="#" class="nav-item" data-page="history">
-                    <span class="nav-label">Full History</span>
-                </a>
-                <div class="nav-divider"></div>
-                <a href="#" class="nav-item" data-page="settings">
-                    <span class="nav-icon">⚙️</span>
-                    <span class="nav-label">Settings</span>
+                    <span class="nav-icon">▤</span>
+                    <span>History</span>
                 </a>
             </nav>
+
+            <button class="upgrade-btn" id="upgradeBtn" type="button">Upgrade Plan</button>
+
+            <div class="sidebar-footer">
+                <button class="footer-link" id="settingsShortcutBtn" type="button">Settings</button>
+                <button class="footer-link" id="logoutBtn" type="button">Logout</button>
+            </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Header -->
             <header class="top-bar">
-                <div class="header-left">
-                    <button class="back-btn" onclick="goBack()">←</button>
-                    <h2 class="header-title">Analytics Dashboard</h2>
+                <div class="top-nav">
+                    <a href="#" class="top-link">Overview</a>
+                    <a href="#" class="top-link active">Detailed Insights</a>
                 </div>
-                <div class="header-right">
-                    <button class="icon-btn" id="refreshBtn" title="Refresh">🔄</button>
-                    <button class="icon-btn" title="Help">❓</button>
+
+                <div class="top-actions">
+                    <button class="circle-btn" id="refreshBtn" type="button" title="Refresh">↻</button>
+                    <button class="circle-btn" type="button" title="Help">?</button>
+                    <button class="avatar-btn" type="button" title="Profile">NR</button>
                 </div>
             </header>
 
-            <!-- Chart Selection Tabs -->
-            <div class="tabs-container">
-                <div class="tabs">
-                    <button class="tab-btn active" data-chart="top-visits">Top 10 Visits</button>
-                    <button class="tab-btn" data-chart="pie-chart">Visit Distribution</button>
-                    <button class="tab-btn" data-chart="column-chart">Visit Comparison</button>
-                    <button class="tab-btn" data-chart="statistics">Statistics</button>
+            <section class="page-header">
+                <div>
+                    <h2>Visit Analytics</h2>
+                    <p>Real-time engagement tracking and site activity trends.</p>
                 </div>
-            </div>
 
-            <!-- Charts Container -->
-            <div class="charts-container">
-                <!-- Bar Chart - Top 10 Visits -->
-                <section class="chart-section active" id="top-visits-section">
-                    <div class="section-header">
-                        <h3>Top 10 Most Visited Sites</h3>
-                        <p class="section-description">Your most frequently visited websites</p>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="topVisitsChart"></canvas>
-                    </div>
-                </section>
+                <div class="range-toggle" role="tablist" aria-label="Range selector">
+                    <button class="range-btn active" type="button" data-mode="day">Day</button>
+                    <button class="range-btn" type="button" data-mode="month">Month</button>
+                    <button class="range-btn" type="button" data-mode="year">Year</button>
+                </div>
+            </section>
 
-                <!-- Pie Chart - Visit Distribution -->
-                <section class="chart-section" id="pie-chart-section">
-                    <div class="section-header">
-                        <h3>Visit Distribution</h3>
-                        <p class="section-description">Percentage breakdown of your browsing habits</p>
-                    </div>
-                    <div class="charts-row">
-                        <div class="chart-wrapper">
-                            <canvas id="pieChart"></canvas>
+            <section class="dashboard-grid">
+                <div class="hero-card card">
+                    <div class="card-head">
+                        <div class="card-title-wrap">
+                            <span class="dot-indicator"></span>
+                            <h3>Top activity trend</h3>
                         </div>
-                        <div class="legend-section">
-                            <h4>Top Sites</h4>
-                            <div id="pieLegend" class="legend-items"></div>
+                        <div class="card-meta">
+                            <span id="trendAverage">Avg: 0 / day</span>
+                            <button class="menu-btn" type="button" aria-label="More options">⋯</button>
                         </div>
                     </div>
-                </section>
+                    <div class="chart-frame">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
 
-                <!-- Column Chart - Top 15 Comparison -->
-                <section class="chart-section" id="column-chart-section">
-                    <div class="section-header">
-                        <h3>Top 15 Sites Comparison</h3>
-                        <p class="section-description">Detailed column chart of your top visited sites</p>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="columnChart"></canvas>
-                    </div>
-                </section>
-
-                <!-- Statistics Section -->
-                <section class="chart-section" id="statistics-section">
-                    <div class="section-header">
-                        <h3>Statistics & Insights</h3>
-                        <p class="section-description">Your browsing analytics at a glance</p>
-                    </div>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-icon">📊</div>
-                            <div class="stat-content">
-                                <p class="stat-label">Total Visits</p>
-                                <p class="stat-value" id="totalVisits">0</p>
+                <aside class="insights-column">
+                    <article class="insight-card card">
+                        <div class="insight-top">
+                            <div>
+                                <p class="insight-label">Total visits</p>
+                                <p class="insight-value" id="totalVisits">0</p>
                             </div>
+                            <span class="trend-badge positive" id="visitGrowth">+12.5%</span>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">🌐</div>
-                            <div class="stat-content">
-                                <p class="stat-label">Unique Sites</p>
-                                <p class="stat-value" id="uniqueSites">0</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">🏆</div>
-                            <div class="stat-content">
-                                <p class="stat-label">Most Visited</p>
-                                <p class="stat-value" id="mostVisited">—</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">📈</div>
-                            <div class="stat-content">
-                                <p class="stat-label">Average Visits</p>
-                                <p class="stat-value" id="averageVisits">0</p>
-                            </div>
-                        </div>
-                    </div>
+                        <p class="insight-support" id="visitWindow">This month</p>
+                    </article>
 
-                    <!-- Table of All Sites -->
-                    <div class="table-section">
-                        <h4>All Tracked Sites</h4>
-                        <div class="table-wrapper">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Domain</th>
-                                        <th>Visits</th>
-                                        <th>Percentage</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sitesTableBody">
-                                    <tr><td colspan="4" class="no-data">Loading data...</td></tr>
-                                </tbody>
-                            </table>
+                    <article class="insight-card card">
+                        <div class="insight-top">
+                            <div>
+                                <p class="insight-label">Most visited</p>
+                                <p class="insight-value insight-value-small" id="mostVisited">—</p>
+                            </div>
+                            <span class="mini-icon">▣</span>
                         </div>
-                    </div>
-                </section>
-            </div>
+                        <div class="progress-track"><span id="topSiteProgress"></span></div>
+                        <p class="insight-support" id="mostVisitedMeta">No data yet</p>
+                    </article>
+
+                    <article class="insight-card card">
+                        <div class="insight-top">
+                            <div>
+                                <p class="insight-label">Average daily views</p>
+                                <p class="insight-value" id="averageVisits">0</p>
+                            </div>
+                            <span class="mini-icon">⌂</span>
+                        </div>
+                        <p class="insight-support" id="uniqueSites">0 tracked domains</p>
+                    </article>
+
+                    <article class="promo-card card">
+                        <h4>Unlock Heatmaps</h4>
+                        <p>Get visual behavior data for a faster reading of browsing patterns.</p>
+                        <button class="promo-btn" id="upgradeCtaBtn" type="button">Get Enterprise</button>
+                    </article>
+                </aside>
+
+                <div class="bottom-stats">
+                    <article class="stat-card card">
+                        <div class="stat-icon">⏱</div>
+                        <div>
+                            <p class="stat-label">Avg session</p>
+                            <p class="stat-value" id="avgSession">00:00</p>
+                        </div>
+                    </article>
+                    <article class="stat-card card">
+                        <div class="stat-icon">↗</div>
+                        <div>
+                            <p class="stat-label">Bounce rate</p>
+                            <p class="stat-value" id="bounceRate">0%</p>
+                        </div>
+                    </article>
+                    <article class="stat-card card">
+                        <div class="stat-icon">◉</div>
+                        <div>
+                            <p class="stat-label">Top source</p>
+                            <p class="stat-value" id="topSource">Direct</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
         </main>
     </div>
 
