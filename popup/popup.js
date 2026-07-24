@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tabs || !tabs[0]) {
       document.getElementById('currentSite').textContent = 'Unable to detect site';
+      document.getElementById('currentSite').classList.add('error-state');
       return;
     }
 
@@ -25,7 +26,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (analyticsBtn) analyticsBtn.addEventListener('click', openAnalytics);
   } catch (error) {
     console.error('Popup initialization error:', error);
-    document.getElementById('currentSite').textContent = 'Error loading';
+    const siteEl = document.getElementById('currentSite');
+    if (siteEl) {
+      siteEl.textContent = 'Error loading';
+      siteEl.classList.add('error-state');
+    }
   }
 });
 
@@ -129,7 +134,5 @@ function openAnalytics() {
   window.close();
 }
 
-// Refresh stats when popup is focused
-window.addEventListener('focus', () => {
-  loadCurrentSiteStats();
-});
+// Refresh stats when popup re-opens (DOMContentLoaded already handles initial load)
+// Popup focus events are unreliable in Chrome extensions, so we reload on each open via DOMContentLoaded

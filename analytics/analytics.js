@@ -22,6 +22,7 @@ const chartColors = {
 document.addEventListener('DOMContentLoaded', async () => {
     setupEventListeners();
     await loadAllData();
+    startAutoRefresh();
 });
 
 function setupEventListeners() {
@@ -55,7 +56,12 @@ function setupEventListeners() {
 
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => window.close());
+        logoutBtn.addEventListener('click', () => navigateTo('settings'));
+    }
+
+    const openPopupBtn = document.getElementById('openPopupBtn');
+    if (openPopupBtn) {
+        openPopupBtn.addEventListener('click', () => navigateTo('current-site'));
     }
 
     const upgradeBtn = document.getElementById('upgradeBtn');
@@ -135,14 +141,11 @@ function updateKpis({ totalVisits, uniqueSites, topSite, averageVisits, modeLimi
     }
 
     if (avgSessionEl) {
-        avgSessionEl.textContent = uniqueSites > 0 ? `${formatNumber(averageVisits)} / site` : '0 / site';
+        avgSessionEl.textContent = uniqueSites > 0 ? `${formatNumber(totalVisits)} total` : '0 total';
     }
 
     if (bounceRateEl) {
-        const disabledShare = uniqueSites > 0
-            ? Math.round((disabledSites.length / (uniqueSites + disabledSites.length)) * 100)
-            : 0;
-        bounceRateEl.textContent = `${disabledShare}%`;
+        bounceRateEl.textContent = '--';
     }
 
     if (topSourceEl) {
@@ -150,13 +153,12 @@ function updateKpis({ totalVisits, uniqueSites, topSite, averageVisits, modeLimi
     }
 
     if (visitGrowthEl) {
-        if (topSite && averageVisits > 0) {
-            const growth = ((topSite.count - averageVisits) / averageVisits) * 100;
-            const rounded = Math.abs(growth) < 1 ? 1 : Math.round(Math.abs(growth));
-            visitGrowthEl.textContent = `${growth >= 0 ? '+' : '-'}${rounded}%`;
-            visitGrowthEl.classList.toggle('positive', growth >= 0);
+        if (topSite && totalVisits > 0) {
+            const share = Math.round((topSite.count / totalVisits) * 100);
+            visitGrowthEl.textContent = share + '% of visits';
+            visitGrowthEl.classList.add('positive');
         } else {
-            visitGrowthEl.textContent = '+0%';
+            visitGrowthEl.textContent = '0% of visits';
             visitGrowthEl.classList.add('positive');
         }
     }
@@ -181,9 +183,8 @@ function buildTrendData(data, limit) {
         return shortLabel.length > 12 ? `${shortLabel.slice(0, 11)}…` : shortLabel;
     });
 
-    const values = limited.map((item, index) => {
-        const ripple = 0.9 + (Math.sin(index * 1.18) * 0.14) + (Math.cos(index * 0.63) * 0.08);
-        return Math.max(0, Math.round(item.count * ripple));
+    const values = limited.map((item) => {
+        return Math.max(0, item.count);
     });
 
     return { labels, values };
@@ -315,6 +316,29 @@ function formatNumber(value) {
     return String(value);
 }
 
-setInterval(() => {
-    loadAllData();
-}, 30000);
+let refreshInterval = null;
+
+function startAutoRefresh() {
+    if (refreshInterval) clearInterval(refreshInterval);
+    refreshInterval = setInterval(() => {
+        loadAllData();
+    }, 30000);
+}
+
+function stopAutoRefresh() {
+    if (refreshInterval) {
+        clearInterval(refreshInterval);
+        refreshInterval = null;
+    }
+}
+
+// Only poll when visible — pause when tab is hidden
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        stopAutoRefresh();
+    } else {
+        loadAllData(); // Fresh data on return
+        startAutoRefresh();
+    }
+});
+// Auto-refresh started inside DOMContentLoaded to avoid double load

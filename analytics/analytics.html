@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How Many - Analytics Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <link rel="stylesheet" href="analytics.css">
 </head>
@@ -11,34 +14,26 @@
     <div class="dashboard-shell">
         <aside class="sidebar">
             <div class="brand-block">
-                <div class="brand-mark">HT</div>
+                <div class="brand-mark">↗</div>
                 <div>
-                    <p class="brand-name">Tracker Pro</p>
-                    <h1>InsightTrack</h1>
-                    <span class="brand-version">V2.4.0</span>
+                    <p class="brand-name">How Many</p>
+                    <h1>Analytics</h1>
+                    <span class="brand-version">v1.1.0</span>
                 </div>
             </div>
 
             <nav class="sidebar-nav" aria-label="Primary">
-                <a href="#" class="nav-item" data-page="current-site">
-                    <span class="nav-icon">⌂</span>
-                    <span>Dashboard</span>
-                </a>
                 <a href="#" class="nav-item active" data-page="analytics">
                     <span class="nav-icon">⌁</span>
                     <span>Analytics</span>
                 </a>
                 <a href="#" class="nav-item" data-page="settings">
                     <span class="nav-icon">◌</span>
-                    <span>Targets</span>
-                </a>
-                <a href="#" class="nav-item" data-page="history">
-                    <span class="nav-icon">▤</span>
-                    <span>History</span>
+                    <span>Settings</span>
                 </a>
             </nav>
 
-            <button class="upgrade-btn" id="upgradeBtn" type="button">Upgrade Plan</button>
+            <button class="upgrade-btn" id="upgradeBtn" type="button">View Settings</button>
 
             <div class="sidebar-footer">
                 <button class="footer-link" id="settingsShortcutBtn" type="button">Settings</button>
@@ -55,8 +50,7 @@
 
                 <div class="top-actions">
                     <button class="circle-btn" id="refreshBtn" type="button" title="Refresh">↻</button>
-                    <button class="circle-btn" type="button" title="Help">?</button>
-                    <button class="avatar-btn" type="button" title="Profile">NR</button>
+                <button class="circle-btn" id="openPopupBtn" type="button" title="Open popup">⌂</button>
                 </div>
             </header>
 
@@ -126,9 +120,9 @@
                     </article>
 
                     <article class="promo-card card">
-                        <h4>Unlock Heatmaps</h4>
-                        <p>Get visual behavior data for a faster reading of browsing patterns.</p>
-                        <button class="promo-btn" id="upgradeCtaBtn" type="button">Get Enterprise</button>
+                        <h4>Tracked Sites</h4>
+                        <p>Your visit data is stored locally and never uploaded. Manage sites from settings.</p>
+                        <button class="promo-btn" id="upgradeCtaBtn" type="button">Open Settings</button>
                     </article>
                 </aside>
 

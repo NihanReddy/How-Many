@@ -308,70 +308,7 @@ button {
 }
 
 
-.storage-svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-}
 
-.storage-bg {
-    fill: none;
-    stroke: #86f2e4;
-    stroke-width: 4;
-}
-
-.storage-progress {
-    fill: none;
-    stroke: #006a61;
-    stroke-width: 4;
-    stroke-dasharray: 276;
-    stroke-dashoffset: 207;
-    transition: stroke-dashoffset 0.5s ease;
-}
-
-.storage-percent {
-    position: absolute;
-    font-size: 24px;
-    font-weight: 600;
-    color: #000;
-}
-
-.storage-info {
-    flex: 1;
-}
-
-.storage-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #191c1e;
-    margin-bottom: 8px;
-}
-
-.storage-text {
-    font-size: 14px;
-    color: #45464d;
-    margin-bottom: 16px;
-}
-
-.storage-actions {
-    display: flex;
-    gap: 16px;
-}
-
-.storage-link {
-    background: none;
-    border: none;
-    color: #006a61;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    text-decoration: underline;
-    padding: 0;
-}
-
-.storage-link:hover {
-    color: #004d47;
-}
 
 /* FOOTER */
 .settings-footer {

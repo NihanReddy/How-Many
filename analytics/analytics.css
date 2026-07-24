@@ -28,7 +28,7 @@ html, body {
 }
 
 body {
-    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-family: 'Inter', "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--text);
     background:
         radial-gradient(circle at top left, rgba(31, 102, 221, 0.12), transparent 36%),

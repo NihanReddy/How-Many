@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "How Many - Site Visit Counter",
+  "version": "1.1.0",
+  "description": "Counts how many times you visit each website with milestone celebrations.",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "notifications",
+    "downloads"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "incognito": "split",
+  "options_page": "settings/settings.html",
+  "background": {
+    "service_worker": "service-worker/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "How Many - Site Visit Counter",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content-scripts/content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
+
